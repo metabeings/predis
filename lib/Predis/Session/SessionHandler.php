@@ -101,8 +101,11 @@ class SessionHandler implements SessionHandlerInterface
      */
     public function write($session_id, $session_data)
     {
-        $this->client->setex($session_id, $this->ttl, $session_data);
-
+        $ttl = $this->client->ttl($session_id);
+        if ($ttl != -1 && $ttl != -2)
+            $this->client->setex($session_id, $ttl, $session_data);
+        else
+            $this->client->setex($session_id, $this->ttl, $session_data);
         return true;
     }
 
