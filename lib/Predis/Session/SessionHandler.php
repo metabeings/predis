@@ -138,4 +138,14 @@ class SessionHandler implements SessionHandlerInterface
     {
         return $this->ttl;
     }
+
+    /**
+     * Returns the session max lifetime value.
+     *
+     */
+    public function setMaxLifeTime($ttl)
+    {
+        $this->ttl = $ttl;
+        return true;
+    }
 }
